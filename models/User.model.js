@@ -1,8 +1,16 @@
-const { Schema, model } = require("mongoose");
+const mongoose = require('mongoose');
+const { Schema } = require("mongoose");
 
-// TODO: Please make sure you edit the User model to whatever makes sense in this case
 const userSchema = new Schema(
   {
+    name: {
+      type: String,
+      required: true
+    },
+    location:{
+      type: String,
+      required: true
+    },
     email: {
       type: String,
       required: [true, 'Email is required.'],
@@ -21,6 +29,4 @@ const userSchema = new Schema(
   }
 );
 
-const User = model("User", userSchema);
-
-module.exports = User;
+module.exports = mongoose.model('user', userSchema);

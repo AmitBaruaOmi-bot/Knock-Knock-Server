@@ -6,7 +6,7 @@ const foodCategory = require('../models/food.category.model.js');
 
 router.get('/foodCategory', (req, res) => {
     foodCategory.find()
-        .populate('foodData, restaurantData, foodOptions')
+        // .populate('foodData, restaurantData, foodOptions')
         .then((allFoodCategory) => {
             res.json(allFoodCategory);
         })
@@ -29,7 +29,7 @@ router.post('/foodCategory', (req, res) => {
 router.get('/foodCategory/:id', (req, res) => {
 
     foodCategory.findById(req.params.id)
-        .populate('foodData , restaurantData , foodOptions')
+        // .populate('foodData , restaurantData , foodOptions')
         .then((foundFoodCategory) => {
             res.json(foundFoodCategory)
         })

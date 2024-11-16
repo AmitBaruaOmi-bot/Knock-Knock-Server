@@ -38,7 +38,7 @@ router.post('/foodData', async (req, res) => {
 router.get('/foodData/:id', (req, res) => {
 
     foodData.findById(req.params.id)
-        .populate('restaurantData , foodData , foodOptions')
+        // .populate('restaurantData , foodData , foodOptions')
         .then((foundFoodData) => {
             res.json(foundFoodData)
         })

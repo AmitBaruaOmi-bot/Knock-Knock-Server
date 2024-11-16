@@ -6,7 +6,7 @@ const restaurantData = require('../models/restaurant.data.model.js');
 router.get('/restaurantData', (req, res) => {
 
     restaurantData.find()
-        .populate('foodData , foodCategory , foodOptions')
+        // .populate('foodData , foodCategory , foodOptions')
         .then((allRestaurantData) => {
             res.json(allRestaurantData);
         })
@@ -29,7 +29,7 @@ router.post('/restaurantData', (req, res) => {
 router.get('/restaurantData/:id', (req, res) => {
 
     restaurantData.findById(req.params.id)
-        .populate('foodData , foodCategory , foodOptions')
+        // .populate('foodData , foodCategory , foodOptions')
         .then((foundRestaurantData) => {
             res.json(foundRestaurantData)
         })

@@ -5,9 +5,8 @@ const foodCategory = require('../models/food.category.model.js');
 
 
 router.get('/foodCategory', (req, res) => {
-
     foodCategory.find()
-        .populate("foodData , restaurantData , foodOptions")
+        .populate('foodData, restaurantData, foodOptions')
         .then((allFoodCategory) => {
             res.json(allFoodCategory);
         })
@@ -29,7 +28,8 @@ router.post('/foodCategory', (req, res) => {
 
 router.get('/foodCategory/:id', (req, res) => {
 
-    foodCategory.findById(req.params.id, req.body)
+    foodCategory.findById(req.params.id)
+        .populate('foodData , restaurantData , foodOptions')
         .then((foundFoodCategory) => {
             res.json(foundFoodCategory)
         })
@@ -51,7 +51,7 @@ router.put('/foodCategory/:id', (req, res) => {
 });
 
 router.delete('/foodCategory/:id', (req, res) => {
-    foodCategory.findByIdAndDelete(req.params.id, req.body)
+    foodCategory.findByIdAndDelete(req.params.id)
         .then((deletedFoodCategory) => {
             res.json(deletedFoodCategory)
         })
@@ -60,6 +60,7 @@ router.delete('/foodCategory/:id', (req, res) => {
         })
 
 });
+
 
 
 module.exports = router;

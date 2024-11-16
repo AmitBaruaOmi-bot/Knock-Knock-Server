@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
-const foodData = require('../models/food.data.model.js');
+const foodCategory = require('../models/food.category.model.js');
+const foodData = require('../models/food.Data.model.js');
+const restaurantData = require('../models/restaurant.data.model.js');
 
 
 
@@ -9,7 +11,7 @@ const foodData = require('../models/food.data.model.js');
 router.get('/foodData', (req, res) => {
 
     foodData.find()
-        .populate("restaurantData , foodCategory , foodOptions")
+        .populate('restaurantData, foodData, foodOptions')
         .then((allFoodData) => {
             res.json(allFoodData);
         })
@@ -18,20 +20,23 @@ router.get('/foodData', (req, res) => {
         })
 });
 
-router.post('/foodData', (req, res) => {
+router.post('/foodData', async (req, res) => {
+    try{
+        const createdFoodData = await foodData.create(req.body);
 
-    foodData.create(req.body)
-        .then((createdFoodData) => {
-            res.json(createdFoodData);
-        })
-        .catch((err) => {
-            res.status(500).json(err);
-        })
+        await updatedFoodData.findByIdAndUpdate(req.body.foodData, {foodData: createdFoodData._id})
+        res.json(createdFoodData);
+    }
+    catch(err){
+        res.status(500).json(err);
+    }
 });
+
 
 router.get('/foodData/:id', (req, res) => {
 
-    foodData.findById(req.params.id, req.body)
+    foodData.findById(req.params.id)
+        .populate('restaurantData , foodData , foodOptions')
         .then((foundFoodData) => {
             res.json(foundFoodData)
         })
@@ -53,7 +58,7 @@ router.put('/foodData/:id', (req, res) => {
 });
 
 router.delete('/foodData/:id', (req, res) => {
-    foodData.findByIdAndDelete(req.params.id, req.body)
+    foodData.findByIdAndDelete(req.params.id)
         .then((deletedFoodData) => {
             res.json(deletedFoodData)
         })
@@ -63,6 +68,32 @@ router.delete('/foodData/:id', (req, res) => {
 
 });
 
+router.get('/foodCategory/:category', (req, res) => {
+
+    foodData.findById({category:req.params.category})
+        .then((foundFoodData) => {
+            res.json(foundFoodData)
+        })
+
+        .catch((err) => {
+            res.status(500).json(err);
+        })
+
+    });
+
+    router.get('/retaurantData/:retaurantName', (req, res) => {
+
+        foodData.findById({retaurantName:req.params.retaurantName})
+            .then((foundFoodData) => {
+                res.json(foundFoodData)
+            })
+    
+            .catch((err) => {
+                res.status(500).json(err);
+            })
+    
+        });
+    
 
 
 module.exports = router;

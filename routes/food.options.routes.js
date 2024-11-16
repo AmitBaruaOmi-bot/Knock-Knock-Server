@@ -7,7 +7,7 @@ const foodOptions = require('../models/food.options.model.js');
 router.get('/foodOptions', (req, res) => {
 
     foodOptions.find()
-        .populate("foodData , restaurantData , foodCategory")
+        .populate('foodData , restaurantData , foodCategory')
         .then((allFoodOptions) => {
             res.json(allFoodOptions);
         })
@@ -29,7 +29,8 @@ router.post('/foodOptions', (req, res) => {
 
 router.get('/foodOptions/:id', (req, res) => {
 
-    foodOptions.findById(req.params.id, req.body)
+    foodOptions.findById(req.params.id)
+        .populate('foodData , restaurantData , foodCategory')
         .then((foundFoodOptions) => {
             res.json(foundFoodOptions)
         })
@@ -51,7 +52,7 @@ router.put('/foodOptions/:id', (req, res) => {
 });
 
 router.delete('/foodOptions/:id', (req, res) => {
-    foodOptions.findByIdAndDelete(req.params.id, req.body)
+    foodOptions.findByIdAndDelete(req.params.id)
         .then((deletedFoodOptions) => {
             res.json(deletedFoodOptions)
         })

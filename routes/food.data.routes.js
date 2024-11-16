@@ -21,14 +21,16 @@ router.get('/foodData', (req, res) => {
 });
 
 router.post('/foodData', async (req, res) => {
-    try{
+    try {
         const createdFoodData = await foodData.create(req.body);
 
-        await updatedFoodData.findByIdAndUpdate(req.body.foodData, {foodData: createdFoodData._id})
-        res.json(createdFoodData);
+        console.log(createdFoodData);
+
+        await updatedFoodCategory.findByIdAndUpdate(req.body.foodCategory, { $push: { foodData: createdFoodData._id } })
+        res.redirect('/foodData/${createdFoodData._id}');
     }
-    catch(err){
-        res.status(500).json(err);
+    catch (err) {
+        res.status(400).json(err);
     }
 });
 
@@ -70,7 +72,7 @@ router.delete('/foodData/:id', (req, res) => {
 
 router.get('/foodCategory/:category', (req, res) => {
 
-    foodData.findById({category:req.params.category})
+    foodData.findById({ category: req.params.category })
         .then((foundFoodData) => {
             res.json(foundFoodData)
         })
@@ -79,21 +81,21 @@ router.get('/foodCategory/:category', (req, res) => {
             res.status(500).json(err);
         })
 
-    });
+});
 
-    router.get('/retaurantData/:retaurantName', (req, res) => {
+router.get('/retaurantData/:retaurantName', (req, res) => {
 
-        foodData.findById({retaurantName:req.params.retaurantName})
-            .then((foundFoodData) => {
-                res.json(foundFoodData)
-            })
-    
-            .catch((err) => {
-                res.status(500).json(err);
-            })
-    
-        });
-    
+    foodData.findById({ retaurantName: req.params.retaurantName })
+        .then((foundFoodData) => {
+            res.json(foundFoodData)
+        })
+
+        .catch((err) => {
+            res.status(500).json(err);
+        })
+
+});
+
 
 
 module.exports = router;

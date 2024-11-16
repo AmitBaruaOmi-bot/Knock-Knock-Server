@@ -8,7 +8,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 // Require the User model in order to interact with the database
-const User = require("../models/User.model.js");
+const User = require("../models/user.model.js");
 
 // Require necessary (isAuthenticated) middleware in order to control access to specific routes
 const { isAuthenticated } = require("../middleware/jwt.middleware.js");
@@ -66,7 +66,7 @@ router.post("/signup", (req, res, next) => {
       const { email, name, _id } = createdUser;
 
       // Create a new object that doesn't expose the password
-      const user = { email, name, _id };
+      const User = { email, name, _id };
 
       // Send a json response containing the user object
       res.status(201).json({ user: user });

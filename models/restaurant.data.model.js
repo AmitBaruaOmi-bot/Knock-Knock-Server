@@ -2,9 +2,13 @@ const mongoose = require('mongoose');
 
 const restaurantDataSchema = new mongoose.Schema(
     {
-        restaurantname:{
-            type: String
-        }
+        
+            name: String,
+            foodData: [{
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'foodData'
+            }]
+        
     }
 );
 

@@ -2,23 +2,27 @@ const mongoose = require('mongoose');
 
 const foodOptionsSchema = new mongoose.Schema(
     {
-        options: {
-            individual: {
-                price: Number
-            },
-            menu: {
-                price: Number
-            },
-            regular: {
-                price: Number
-            },
-            medium: {
-                price: Number
-            },
-            large: {
-                price: Number
-            }
+
+        individual: {
+            price: Number
+        },
+        menu: {
+            price: Number
+        },
+        regular: {
+            price: Number
+        },
+        medium: {
+            price: Number
+        },
+        large: {
+            price: Number
+        },
+        foodData: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'foodData'
         }
+]
     }
 );
 

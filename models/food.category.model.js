@@ -2,11 +2,14 @@ const mongoose = require('mongoose');
 
 
 const foodCategorySchema = new mongoose.Schema(
-    {
-        categoryname:{
-            type:String       
+    
+        {
+            name: String,
+            foodData: [{
+                type: mongoose.Schema.Types.ObjectId, 
+                ref: 'foodData'
+            }]  
         }
-    }
 
 );
 

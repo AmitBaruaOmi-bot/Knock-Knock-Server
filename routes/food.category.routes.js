@@ -7,6 +7,7 @@ const foodCategory = require('../models/food.category.model.js');
 router.get('/foodCategory', (req, res) => {
 
     foodCategory.find()
+        .populate("foodData , restaurantData , foodOptions")
         .then((allFoodCategory) => {
             res.json(allFoodCategory);
         })

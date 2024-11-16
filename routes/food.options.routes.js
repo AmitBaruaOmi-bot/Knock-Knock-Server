@@ -7,6 +7,7 @@ const foodOptions = require('../models/food.options.model.js');
 router.get('/foodOptions', (req, res) => {
 
     foodOptions.find()
+        .populate("foodData , restaurantData , foodCategory")
         .then((allFoodOptions) => {
             res.json(allFoodOptions);
         })

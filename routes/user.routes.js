@@ -62,7 +62,7 @@ router.post("/login", [
 });
 
 router.get('/user', (req, res) => {
-  user.findOne(req.body)
+  user.find(req.body)
     .then((user) => {
       res.json(user)
     })

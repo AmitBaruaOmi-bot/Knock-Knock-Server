@@ -13,6 +13,15 @@ mongoose
   .then((x) => {
     const dbName = x.connections[0].name;
     console.log(`Connected to Mongo! Database name: "${dbName}"`);
+
+    // const fetched_Data = mongoose.connection.db.collection("fooddatas");
+    // fetched_Data.find({}).toArray(function(err, docs) {
+    //   if(err) console.log(err);
+    //   else{
+    //     global.fooddatas = data;
+    //     console.log(global.fooddatas);
+    //   }
+    // })
   })
   .catch((err) => {
     console.error("Error connecting to mongo: ", err);

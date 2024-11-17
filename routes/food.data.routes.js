@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const foodCategory = require('../models/food.category.model.js');
-const foodData = require('../models/food.Data.model.js');
+const foodData = require('../models/food.data.model.js');
 const restaurantData = require('../models/restaurant.data.model.js');
 
 
@@ -11,7 +11,7 @@ const restaurantData = require('../models/restaurant.data.model.js');
 router.get('/foodData', (req, res) => {
 
     foodData.find()
-        .populate('restaurantData, foodData, foodOptions')
+        .populate('foodCategory restaurantData foodOptions')
         .then((allFoodData) => {
             res.json(allFoodData);
         })
@@ -38,7 +38,6 @@ router.post('/foodData', async (req, res) => {
 router.get('/foodData/:id', (req, res) => {
 
     foodData.findById(req.params.id)
-        // .populate('restaurantData , foodData , foodOptions')
         .then((foundFoodData) => {
             res.json(foundFoodData)
         })

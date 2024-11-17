@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/user.model');
+const user = require('../models/user.model');
 const { body, validationResult } = require('express-validator');
 
 router.use(express.json());
@@ -20,13 +20,14 @@ router.post("/signup", [
     return res.status(400).json({ err: err.array() });
   }
   try {
-    await User.create({
+    await user.create({
       name: req.body.name,
       email: req.body.email,
       password: req.body.password,
       location: req.body.location
     })
-    res.json({ success: true })
+    
+    res.json(req.body);
   }
   catch (err) {
     console.error(err);
@@ -44,7 +45,7 @@ router.post("/login", [
   }
 
   try {
-    let userData = await User.findOne(req.body.email)
+    let userData = await user.findOne(req.body.email)
     if (!userData) {
       return res.status(404).json({ success: false, message: "Email not found" });
     }
@@ -60,48 +61,49 @@ router.post("/login", [
   }
 });
 
-router.get('/User', (req, res) => {
-  User.findOne(req.body)
-      .then((User) => {
-          res.json(User)
+router.get('/user', (req, res) => {
+  user.findOne(req.body)
+    .then((user) => {
+      res.json(user)
+    })
+    .catch((err) => {
+      res.status(500).json(err)
+    })
 
-              .catch((err) => {
-                  res.status(500).json(err)
-              })
-      })
 });
 
-router.get('/User/:id', (req, res) => {
-  User.findById(req.params.id)
-      .then((User) => {
-          res.json(User)
+router.get('/user/:id', (req, res) => {
+  user.findById(req.params.id, req.body)
+    .then((foundUser) => {
+      res.json(foundUser)
+    })
 
-              .catch((err) => {
-                  res.status(500).json(err)
-              })
-      })
+    .catch((err) => {
+      res.status(500).json(err)
+    })
+
 });
 
-router.put('/User/:id', (req, res) => {
-  User.findByIdAndUpdate(req.params.id, req.body, { new: true })
-      .then((updatedUser) => {
-          res.json(updatedUser)
+router.put('/user/:id', (req, res) => {
+  user.findByIdAndUpdate(req.params.id, req.body, { new: true })
+    .then((updatedUser) => {
+      res.json(updatedUser)
+    })
+    .catch((err) => {
+      res.status(500).json(err)
+    })
 
-              .catch((err) => {
-                  res.status(500).json(err)
-              })
-      })
 });
 
-router.delete('/User/:id', (req, res) => {
-  User.findByIdAndDelete(req.params.id, req.body)
-      .then((deletedUser) => {
-          res.json(deletedUser)
+router.delete('/user/:id', (req, res) => {
+  user.findByIdAndDelete(req.params.id, req.body)
+    .then((deletedUser) => {
+      res.json(deletedUser)
+    })
+    .catch((err) => {
+      res.status(500).json(err)
+    })
 
-              .catch((err) => {
-                  res.status(500).json(err)
-              })
-      })
 })
 
 

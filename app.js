@@ -19,10 +19,10 @@ const indexRoutes = require("./routes/index.routes.js");
 app.use("/api", indexRoutes);
 
 const userRoutes = require("./routes/user.routes.js");
-app.use("/api", userRoutes);
+app.use("/auth", userRoutes);
 
 const authRoutes = require("./routes/auth.routes.js");
-app.use("/auth", authRoutes);
+app.use("/api", authRoutes);
 
 const foodDataRoutes = require("./routes/food.data.routes.js");
 app.use("/", foodDataRoutes);
@@ -32,9 +32,6 @@ app.use("/", foodCategoryRoutes);
 
 const restaurantDataRoutes = require("./routes/restaurant.data.routes.js");
 app.use("/", restaurantDataRoutes);
-
-const foodOptionsRoutes = require("./routes/food.options.routes.js");
-app.use("/", foodOptionsRoutes);
 
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes

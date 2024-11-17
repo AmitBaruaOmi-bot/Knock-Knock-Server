@@ -8,7 +8,7 @@ router.use(express.json());
 
 router.post("/signup", [
   body('email').isEmail(),
-  body('name').isLength({ min: 5 }),
+  body('name').isLength({ min: 4 }),
   body('password').isLength({ min: 8 })
 ], async (req, res) => {
   console.log(req.body.name,

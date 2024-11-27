@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 const userSchema = new mongoose.Schema(
 
@@ -16,6 +17,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: [true, 'Email is required.'],
       unique: true,
+      match: [/\S+@\S+\.\S+/, 'Please enter a valid email address.']
     },
     password: {
       type: String,
@@ -24,6 +26,7 @@ const userSchema = new mongoose.Schema(
   }
 
 );
+
 
 const user = mongoose.model('user', userSchema);
 module.exports = user;

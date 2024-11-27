@@ -1,33 +1,33 @@
 const express = require('express');
 const router = express.Router();
 
-const foodCategory = require('../models/food.category.model.js');
-const foodData = require('../models/food.data.model.js');
-const restaurantData = require('../models/restaurant.data.model.js');
+// const foodCategory = require('../models/food.category.model.js');
+const fooddata = require('../models/food.data.model.js');
+// const restaurantData = require('../models/restaurant.data.model.js');
 
 
 
 
-router.get('/foodData', (req, res) => {
+router.get('/getfooddata', (req, res) => {
 
-    foodData.find()
-        .populate('foodCategory restaurantData foodOptions')
-        .then((allFoodData) => {
-            res.json(allFoodData);
+    fooddata.find()
+        // .populate('foodCategory restaurantData foodOptions')
+        .then((allfooddata) => {
+            res.json(allfooddata);
         })
         .catch((err) => {
             res.status(500).json(err);
         })
 });
 
-router.post('/foodData', async (req, res) => {
+router.post('/fooddata', async (req, res) => {
     try {
-        const createdFoodData = await foodData.create(req.body);
+        const createdfooddata = await fooddata.create(req.body);
 
-        console.log(createdFoodData);
-
-        await updatedFoodCategory.findByIdAndUpdate(req.body.foodCategory, { $push: { foodData: createdFoodData._id } })
-        res.redirect('/foodData/${createdFoodData._id}');
+        console.log(createdfooddata);
+        
+        res.status(200).json(createdfooddata);
+        // res.redirect('/fooddata/${createdfooddata._id}');
     }
     catch (err) {
         res.status(400).json(err);
@@ -35,11 +35,11 @@ router.post('/foodData', async (req, res) => {
 });
 
 
-router.get('/foodData/:id', (req, res) => {
+router.get('/fooddata/:id', (req, res) => {
 
-    foodData.findById(req.params.id)
-        .then((foundFoodData) => {
-            res.json(foundFoodData)
+    fooddata.findById(req.params.id)
+        .then((foundfooddata) => {
+            res.json(foundfooddata)
         })
 
         .catch((err) => {
@@ -47,10 +47,10 @@ router.get('/foodData/:id', (req, res) => {
         })
 });
 
-router.put('/foodData/:id', (req, res) => {
-    foodData.findByIdAndUpdate(req.params.id, req.body, { new: true })
-        .then((updatedFoodData) => {
-            res.json(updatedFoodData)
+router.put('/fooddata/:id', (req, res) => {
+    fooddata.findByIdAndUpdate(req.params.id, req.body, { new: true })
+        .then((updatedfooddata) => {
+            res.json(updatedfooddata)
         })
         .catch((err) => {
             res.status(500).json(err);
@@ -58,10 +58,10 @@ router.put('/foodData/:id', (req, res) => {
 
 });
 
-router.delete('/foodData/:id', (req, res) => {
-    foodData.findByIdAndDelete(req.params.id)
-        .then((deletedFoodData) => {
-            res.json(deletedFoodData)
+router.delete('/fooddata/:id', (req, res) => {
+    fooddata.findByIdAndDelete(req.params.id)
+        .then((deletedfooddata) => {
+            res.json(deletedfooddata)
         })
         .catch((err) => {
             res.json(err)
@@ -71,9 +71,9 @@ router.delete('/foodData/:id', (req, res) => {
 
 router.get('/foodCategory/:category', (req, res) => {
 
-    foodData.findById({ category: req.params.category })
-        .then((foundFoodData) => {
-            res.json(foundFoodData)
+    fooddata.findById({ category: req.params.category })
+        .then((foundfooddata) => {
+            res.json(foundfooddata)
         })
 
         .catch((err) => {
@@ -84,9 +84,9 @@ router.get('/foodCategory/:category', (req, res) => {
 
 router.get('/retaurantData/:retaurantName', (req, res) => {
 
-    foodData.findById({ retaurantName: req.params.retaurantName })
-        .then((foundFoodData) => {
-            res.json(foundFoodData)
+    fooddata.findById({ retaurantName: req.params.retaurantName })
+        .then((foundfooddata) => {
+            res.json(foundfooddata)
         })
 
         .catch((err) => {

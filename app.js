@@ -21,17 +21,20 @@ app.use("/api", indexRoutes);
 const userRoutes = require("./routes/user.routes.js");
 app.use("/auth", userRoutes);
 
-const authRoutes = require("./routes/auth.routes.js");
-app.use("/api", authRoutes);
+// const authRoutes = require("./routes/auth.routes.js");
+// app.use("/api", authRoutes);
 
 const foodDataRoutes = require("./routes/food.data.routes.js");
-app.use("/", foodDataRoutes);
+app.use("/food", foodDataRoutes);
 
-const foodCategoryRoutes = require("./routes/food.category.routes.js");
-app.use("/", foodCategoryRoutes);
+const orderDataRoutes = require("./routes/order.data.routes.js");
+app.use("/order", orderDataRoutes);
 
-const restaurantDataRoutes = require("./routes/restaurant.data.routes.js");
-app.use("/", restaurantDataRoutes);
+// const foodCategoryRoutes = require("./routes/food.category.routes.js");
+// app.use("/category", foodCategoryRoutes);
+
+// const restaurantDataRoutes = require("./routes/restaurant.data.routes.js");
+// app.use("/restaurant", restaurantDataRoutes);
 
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes

@@ -1,16 +1,12 @@
-const mongoose = require('mongoose');
+//  const mongoose = require('mongoose');
 
-const restaurantDataSchema = new mongoose.Schema(
-    {
-        
-            name: String,
-            foodData: [{
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'foodData'
-            }]
-        
-    }
-);
+//  const restaurantDataSchema = new mongoose.Schema(
+//      {
+//         restaurantname: {
+//             type: String
+//         }
+//      }
+//  );
 
-const restaurantData = mongoose.model('restaurantData', restaurantDataSchema);
-module.exports = restaurantData;
+//  const restaurantData = mongoose.model('restaurantData', restaurantDataSchema);
+//  module.exports = restaurantData;
